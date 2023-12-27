@@ -29,9 +29,13 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         $this->routes(function () {
-            Route::middleware('api')
-                ->prefix('api')
-                ->group(base_path('routes/api.php'));
+            Route::middleware(['role:super admin|admin|customer support|sales and marketing|accounting and finance,admins'])
+                ->prefix('admin-api')
+                ->group(base_path('routes/admin/api.php'));
+
+            // Route::middleware(['role:customer'])
+            //     ->prefix('customer-api')
+            //     ->group(base_path('routes/customer/api.php'));
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
