@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
@@ -23,14 +23,25 @@ class AuthController extends Controller
     public function authenticate(Request $request)
     {
         try {
-            $request->validate([
-                'email' => ['required', 'email'],
-                'password' => ['required'],
-            ]);
+            if ($request->header('Origin') === env('FRONTEND_URL', 'http://localhost:5173')) {
+                // Authenticate backend user (customer)
+                $request->validate([
+                    'email' => ['required', 'email'],
+                    'password' => ['required'],
+                ]);
 
-            $remember = $request->remember ?? false;
+                $guard = 'admins';
+            } else {
+                // Authenticate website user (admin)
+                $request->validate([
+                    'email' => ['required', 'email'],
+                    'password' => ['required'],
+                ]);
 
-            if (!Auth::guard('admins')->attempt($request->only('email', 'password'), $remember)) {
+                $guard = 'customers';
+            }
+
+            if (!Auth::guard($guard)->attempt($request->only('email', 'password'))) {
                 throw new Exception('Invalid Credentials.');
             }
 
