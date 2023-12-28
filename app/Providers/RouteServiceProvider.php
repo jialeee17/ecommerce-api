@@ -29,7 +29,7 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         $this->routes(function () {
-            Route::middleware(['role:super admin|admin|customer support|sales and marketing|accounting and finance,admins'])
+            Route::middleware(['api'])
                 ->prefix('admin-api')
                 ->group(base_path('routes/admin/api.php'));
 
