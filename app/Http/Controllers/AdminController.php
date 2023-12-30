@@ -120,7 +120,7 @@ class AdminController extends Controller
                 && $request->file('avatar')->isValid()) {
                 $path = $request->file('avatar')->store('avatars');
 
-                $data['avatar_path'] = $path;
+                $data['avatar_url'] = $path;
             }
 
             $this->adminRepository->updateAdmin($admin->id, $data);
