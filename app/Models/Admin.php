@@ -3,12 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Storage;
 
 class Admin extends Authenticatable
 {
@@ -25,6 +27,8 @@ class Admin extends Authenticatable
         'last_name',
         'email',
         'password',
+        'phone',
+        'avatar_path',
         'status',
         'last_login_at',
     ];
@@ -51,4 +55,23 @@ class Admin extends Authenticatable
         'created_at' => 'datetime:Y-m-d H:i:s',
         'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'avatar_url'
+    ];
+
+    /* -------------------------------------------------------------------------- */
+    /*                            Accessors & Mutators                            */
+    /* -------------------------------------------------------------------------- */
+    protected function avatarUrl(): Attribute
+    {
+        return new Attribute(
+            get: fn (mixed $value, array $attributes) => $attributes['avatar_path'] ? Storage::disk('s3')->url($attributes['avatar_path']) : null,
+        );
+    }
 }

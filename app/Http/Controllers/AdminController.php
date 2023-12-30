@@ -24,7 +24,7 @@ class AdminController extends Controller
     public function index()
     {
         try {
-            $admins = Admin::all();
+            $admins = $this->adminRepository->getAllAdmins();
 
             return new ApiSuccessResponse(
                 [
@@ -101,17 +101,29 @@ class AdminController extends Controller
                 'last_name' => ['nullable', 'string'],
                 'email' => ['required', 'email', Rule::unique('admins', 'email')->ignore($admin)],
                 'password' => ['required'],
+                'phone' => ['nullable', 'string'],
+                'avatar' => ['nullable', 'image'],
                 'status' => [Rule::enum(AdminStatusesEnum::class)],
             ]);
 
-            $admin = $this->adminRepository->updateAdmin($admin->id, [
+            $data = [
                 'username' => $request->username,
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'phone' => $request->phone,
                 'status' => $request->status,
-            ]);
+            ];
+
+            if ($request->hasFile('avatar')
+                && $request->file('avatar')->isValid()) {
+                $path = $request->file('avatar')->store('avatars');
+
+                $data['avatar_path'] = $path;
+            }
+
+            $this->adminRepository->updateAdmin($admin->id, $data);
 
             return new ApiSuccessResponse(
                 [],
@@ -128,7 +140,7 @@ class AdminController extends Controller
     public function destroy(Admin $admin)
     {
         try {
-            $admin = $this->adminRepository->deleteAdmin($admin->id);
+            $this->adminRepository->deleteAdmin($admin->id);
 
             return new ApiSuccessResponse(
                 [],

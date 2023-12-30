@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -20,30 +21,23 @@ class AuthController extends Controller
         $this->adminRepository = $adminRepository;
     }
 
-    public function authenticate(Request $request)
+    // Admins Guard
+    public function adminLogin(Request $request)
     {
         try {
-            if ($request->header('Origin') === env('FRONTEND_URL', 'http://localhost:5173')) {
-                // Authenticate backend user (customer)
-                $request->validate([
-                    'email' => ['required', 'email'],
-                    'password' => ['required'],
-                ]);
+            // Authenticate backend user (customer)
+            $request->validate([
+                'email' => ['required', 'email'],
+                'password' => ['required'],
+            ]);
 
-                $guard = 'admins';
-            } else {
-                // Authenticate website user (admin)
-                $request->validate([
-                    'email' => ['required', 'email'],
-                    'password' => ['required'],
-                ]);
-
-                $guard = 'customers';
-            }
-
-            if (!Auth::guard($guard)->attempt($request->only('email', 'password'))) {
+            if (!Auth::guard('admins')->attempt($request->only('email', 'password'))) {
                 throw new Exception('Invalid Credentials.');
             }
+
+            $user = Auth::user();
+            $user->last_login_at = Carbon::now();
+            $user->save();
 
             return new ApiSuccessResponse(
                 [
@@ -59,7 +53,7 @@ class AuthController extends Controller
         }
     }
 
-    public function register(Request $request)
+    public function adminRegister(Request $request)
     {
         try {
             $request->validate([
