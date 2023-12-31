@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use App\Enums\UserStatusesEnum;
 use Illuminate\Validation\Rule;
-use App\Enums\AdminStatusesEnum;
 use Illuminate\Support\Facades\Hash;
 use App\Repositories\AdminRepository;
 use App\Http\Responses\ApiErrorResponse;
@@ -49,7 +49,7 @@ class AdminController extends Controller
                 'last_name' => ['nullable', 'string'],
                 'email' => ['required', 'email', 'unique:admins,email'],
                 'password' => ['required'],
-                'status' => [Rule::enum(AdminStatusesEnum::class)],
+                'status' => [Rule::enum(UserStatusesEnum::class)],
             ]);
 
             $admin = $this->adminRepository->createAdmin([
@@ -103,7 +103,7 @@ class AdminController extends Controller
                 'password' => ['required'],
                 'phone' => ['nullable', 'string'],
                 'avatar' => ['nullable', 'image'],
-                'status' => [Rule::enum(AdminStatusesEnum::class)],
+                'status' => [Rule::enum(UserStatusesEnum::class)],
             ]);
 
             $data = [
