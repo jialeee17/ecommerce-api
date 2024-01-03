@@ -28,7 +28,7 @@ class Admin extends Authenticatable
         'email',
         'password',
         'phone',
-        'avatar_url',
+        'avatar_path',
         'status',
         'last_login_at',
     ];
@@ -71,7 +71,7 @@ class Admin extends Authenticatable
     protected function avatarUrl(): Attribute
     {
         return new Attribute(
-            get: fn (mixed $value) => $value ? Storage::disk('s3')->url($value) : null,
+            get: fn (mixed $value, array $attributes) => $attributes['avatar_path'] ? Storage::disk('s3')->url($attributes['avatar_path']) : null,
         );
     }
 }

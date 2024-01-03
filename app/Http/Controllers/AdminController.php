@@ -117,10 +117,11 @@ class AdminController extends Controller
             ];
 
             if ($request->hasFile('avatar')
-                && $request->file('avatar')->isValid()) {
+                && $request->file('avatar')->isValid()
+            ) {
                 $path = $request->file('avatar')->store('avatars');
 
-                $data['avatar_url'] = $path;
+                $data['avatar_path'] = $path;
             }
 
             $this->adminRepository->updateAdmin($admin->id, $data);
