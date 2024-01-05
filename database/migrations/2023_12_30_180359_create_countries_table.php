@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('country_code', 2);
             $table->string('currency');
-            $table->string('flag_url')->nullable();
+            $table->string('flag_path')->nullable();
             $table->string('timezone');
             $table->timestamps();
         });

@@ -18,7 +18,7 @@ class CountrySeeder extends Seeder
         Country::upsert(
             $countries,
             ['name'],
-            ['country_code', 'currency', 'flag_url', 'timezone']
+            ['country_code', 'currency', 'flag_path', 'timezone']
         );
     }
 
@@ -32,28 +32,28 @@ class CountrySeeder extends Seeder
                 'name' => 'Indonesia',
                 'country_code' => 'ID',
                 'currency' => 'IDR',
-                'flag_url' => 'ID.png',
+                'flag_path' => 'ID.png',
                 'timezone' => 'GMT+7',
             ],
             [
                 'name' => 'Malaysia',
                 'country_code' => 'MY',
                 'currency' => 'MYR',
-                'flag_url' => 'MY.png',
+                'flag_path' => 'MY.png',
                 'timezone' => 'GMT+8',
             ],
             [
                 'name' => 'Singapore',
                 'country_code' => 'SG',
                 'currency' => 'SGD',
-                'flag_url' => 'SG.png',
+                'flag_path' => 'SG.png',
                 'timezone' => 'GMT+8',
             ],
             [
                 'name' => 'Thailand',
                 'country_code' => 'TH',
                 'currency' => 'THB',
-                'flag_url' => 'TH.png',
+                'flag_path' => 'TH.png',
                 'timezone' => 'GMT+7',
             ],
         ];
