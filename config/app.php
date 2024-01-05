@@ -160,6 +160,7 @@ return [
          * Package Service Providers...
          */
         Spatie\Permission\PermissionServiceProvider::class,
+        RichanFongdasen\EloquentBlameable\ServiceProvider::class,
 
         /*
          * Application Service Providers...
