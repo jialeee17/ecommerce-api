@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\CustomerController;
 
@@ -49,5 +50,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{country}', [CountryController::class, 'show'])->name('show');
         // Route::match(['put', 'patch'], '/{country}', [CountryController::class, 'update'])->name('update');
         // Route::delete('/{country}', [CountryController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('categories')->name('category.')->group(function () {
+        Route::get('/', [CategoryController::class, 'index'])->name('index');
+        Route::post('/', [CategoryController::class, 'store'])->name('store');
+        Route::get('/{category}', [CategoryController::class, 'show'])->name('show');
+        Route::match(['put', 'patch'], '/{category}', [CategoryController::class, 'update'])->name('update');
+        Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('destroy');
     });
 });
