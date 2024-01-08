@@ -62,7 +62,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $appends = [
-        //
+        'avatar_url',
     ];
 
     /* -------------------------------------------------------------------------- */
@@ -71,7 +71,7 @@ class Admin extends Authenticatable
     protected function avatarUrl(): Attribute
     {
         return new Attribute(
-            get: fn (mixed $value, array $attributes) => $attributes['avatar_path'] ? Storage::disk('s3')->url($attributes['avatar_path']) : null,
+            get: fn (mixed $value, array $attributes) => $attributes['avatar_path'] ? Storage::url($attributes['avatar_path']) : null,
         );
     }
 }
