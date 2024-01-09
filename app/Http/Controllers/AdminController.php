@@ -9,6 +9,7 @@ use App\Enums\UserStatusesEnum;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 use App\Repositories\AdminRepository;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Responses\ApiErrorResponse;
 use App\Http\Responses\ApiSuccessResponse;
 
@@ -27,9 +28,7 @@ class AdminController extends Controller
             $admins = $this->adminRepository->getAllAdmins();
 
             return new ApiSuccessResponse(
-                [
-                    'admins' => $admins
-                ],
+                $admins,
                 'Retrieve Admin List Successfully.',
             );
         } catch (Exception $e) {
@@ -62,9 +61,7 @@ class AdminController extends Controller
             ]);
 
             return new ApiSuccessResponse(
-                [
-                    'admin' => $admin
-                ],
+                $admin,
                 'Create Admin Successfully.',
             );
         } catch (Exception $e) {
@@ -79,9 +76,7 @@ class AdminController extends Controller
     {
         try {
             return new ApiSuccessResponse(
-                [
-                    'admin' => $admin
-                ],
+                $admin,
                 'Retrieve Admin Details Successfully.',
             );
         } catch (Exception $e) {
@@ -116,9 +111,11 @@ class AdminController extends Controller
                 'status' => $request->status,
             ];
 
-            if ($request->hasFile('avatar')
-                && $request->file('avatar')->isValid()
-            ) {
+            if ($request->hasFile('avatar')) {
+                if ($path = $admin->avatar_path) {
+                    Storage::delete($path);
+                }
+
                 $path = $request->file('avatar')->store('avatars');
 
                 $data['avatar_path'] = $path;
