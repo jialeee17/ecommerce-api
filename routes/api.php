@@ -4,9 +4,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AttributeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,11 +63,37 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('destroy');
     });
 
+    Route::prefix('products')->name('product.')->group(function () {
+        Route::get('/', [ProductController::class, 'index'])->name('index');
+        Route::post('/', [ProductController::class, 'store'])->name('store');
+        Route::get('/{product}', [ProductController::class, 'show'])->name('show');
+        Route::match(['put', 'patch'], '/{product}', [ProductController::class, 'update'])->name('update');
+        Route::delete('/{product}', [ProductController::class, 'destroy'])->name('destroy');
+    });
+
     Route::prefix('tags')->name('tag.')->group(function () {
         Route::get('/', [TagController::class, 'index'])->name('index');
         Route::post('/', [TagController::class, 'store'])->name('store');
         Route::get('/{tag}', [TagController::class, 'show'])->name('show');
         Route::match(['put', 'patch'], '/{tag}', [TagController::class, 'update'])->name('update');
         Route::delete('/{tag}', [TagController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('attributes')->name('attribute.')->group(function () {
+        Route::get('/', [AttributeController::class, 'index'])->name('index');
+        Route::post('/', [AttributeController::class, 'store'])->name('store');
+        Route::get('/{attribute}', [AttributeController::class, 'show'])->name('show');
+        Route::match(['put', 'patch'], '/{attribute}', [AttributeController::class, 'update'])->name('update');
+        Route::delete('/{attribute}', [AttributeController::class, 'destroy'])->name('destroy');
+
+        Route::prefix('/{attribute}')->group(function () {
+            Route::prefix('values')->name('value.')->group(function () {
+                Route::get('/', [AttributeController::class, 'indexAttributeValue'])->name('index');
+                Route::post('/', [AttributeController::class, 'storeAttributeValue'])->name('store');
+                Route::get('/{attributeValue}', [AttributeController::class, 'showAttributeValue'])->name('show');
+                Route::match(['put', 'patch'], '/{attributeValue}', [AttributeController::class, 'updateAttributeValue'])->name('update');
+                Route::delete('/{attributeValue}', [AttributeController::class, 'destroyAttributeValue'])->name('destroy');
+            });
+        });
     });
 });
