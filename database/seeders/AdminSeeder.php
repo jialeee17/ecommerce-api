@@ -29,7 +29,7 @@ class AdminSeeder extends Seeder
         }
     }
 
-    private function getUsers()
+    private function getUsers(): array
     {
         return [
             [

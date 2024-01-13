@@ -22,7 +22,7 @@ class CountrySeeder extends Seeder
         );
     }
 
-    private function getCountries()
+    private function getCountries(): array
     {
         // * Country Code List: https://countrycode.org/
         // * Currency Code List: https://www.iban.com/currency-codes

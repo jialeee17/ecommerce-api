@@ -38,7 +38,7 @@ class RolesAndPermissionsSeeder extends Seeder
         }
     }
 
-    private function getRoles()
+    private function getRoles(): array
     {
         return [
             [
@@ -64,7 +64,7 @@ class RolesAndPermissionsSeeder extends Seeder
         ];
     }
 
-    private function getPermissions()
+    private function getPermissions(): array
     {
         return [
             // [

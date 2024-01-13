@@ -25,7 +25,6 @@ class Setting extends Model
     ];
 
     protected $hidden = [
-        'created_by',
         'updated_by',
         'deleted_by',
     ];

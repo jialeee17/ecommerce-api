@@ -30,7 +30,7 @@ class SettingSeeder extends Seeder
         }
     }
 
-    private function getCategoriesAndSettings()
+    private function getCategoriesAndSettings(): array
     {
         return [
             'general' => [

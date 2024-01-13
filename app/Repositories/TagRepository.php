@@ -18,7 +18,10 @@ class TagRepository
 
     public function updateTag($id, array $data)
     {
-        return Tag::findOrFail($id)->update($data);
+        $tag = Tag::findOrFail($id);
+        $tag->update($data);
+
+        return $tag;
     }
 
     public function deleteTag($id)

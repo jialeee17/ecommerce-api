@@ -32,7 +32,7 @@ class UpsertCategoryRequest extends FormRequest
                 'slug' => ['required', 'string', Rule::unique('categories', 'slug')->ignore($category)],
                 'description' => ['nullable', 'string'],
                 'image' => ['nullable', 'image'],
-                'status' => [Rule::enum(CommonStatusesEnum::class)],
+                'status' => ['required', Rule::enum(CommonStatusesEnum::class)],
                 'parent_category_id' => ['nullable', 'integer', 'exists:categories,id']
             ];
         } else {
@@ -42,7 +42,7 @@ class UpsertCategoryRequest extends FormRequest
                 'slug' => ['required', 'string', 'unique:categories,slug'],
                 'description' => ['nullable', 'string'],
                 'image' => ['nullable', 'image'],
-                'status' => [Rule::enum(CommonStatusesEnum::class)],
+                'status' => ['required', Rule::enum(CommonStatusesEnum::class)],
                 'parent_category_id' => ['nullable', 'integer', 'exists:categories,id']
             ];
         }
