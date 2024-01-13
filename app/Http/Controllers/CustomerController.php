@@ -91,7 +91,7 @@ class CustomerController extends Controller
     public function update(UpsertCustomerRequest $request, Customer $customer)
     {
         try {
-            $this->customerRepository->updateCustomer($customer->id, [
+            $data = [
                 'username' => $request->username,
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
@@ -105,10 +105,12 @@ class CustomerController extends Controller
                 'postcode' => $request->postcode,
                 'country_id' => $request->country_id,
                 'status' => $request->status,
-            ]);
+            ];
+
+            $data = $this->customerRepository->updateCustomer($customer->id, $data);
 
             return new ApiSuccessResponse(
-                [],
+                $data,
                 'Update Customer Details Successfully.',
             );
         } catch (Exception $e) {

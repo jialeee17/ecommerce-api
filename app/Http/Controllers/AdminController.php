@@ -121,10 +121,10 @@ class AdminController extends Controller
                 $data['avatar_path'] = $path;
             }
 
-            $this->adminRepository->updateAdmin($admin->id, $data);
+            $data = $this->adminRepository->updateAdmin($admin->id, $data);
 
             return new ApiSuccessResponse(
-                [],
+                $data,
                 'Update Admin Details Successfully.',
             );
         } catch (Exception $e) {

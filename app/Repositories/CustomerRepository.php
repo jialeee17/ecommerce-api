@@ -19,7 +19,10 @@ class CustomerRepository implements CustomerRepositoryInterface
 
     public function updateCustomer($id, array $data)
     {
-        return Customer::findOrFail($id)->update($data);
+        $customer = Customer::findOrFail($id);
+        $customer->update($data);
+
+        return $customer;
     }
 
     public function deleteCustomer($id)

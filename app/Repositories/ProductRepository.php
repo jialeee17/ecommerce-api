@@ -18,7 +18,10 @@ class ProductRepository
 
     public function updateProduct($id, array $data)
     {
-        return Product::findOrFail($id)->update($data);
+        $product = Product::findOrFail($id);
+        $product->update($data);
+
+        return $product;
     }
 
     public function deleteProduct($id)

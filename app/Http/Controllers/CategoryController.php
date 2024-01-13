@@ -104,10 +104,10 @@ class CategoryController extends Controller
                 $data['image_path'] = $path;
             }
 
-            $this->categoryRepository->updateCategory($category->id, $data);
+            $data = $this->categoryRepository->updateCategory($category->id, $data);
 
             return new ApiSuccessResponse(
-                [],
+                $data,
                 'Update Category Details Successfully.',
             );
         } catch (Exception $e) {

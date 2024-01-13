@@ -19,7 +19,10 @@ class AdminRepository implements AdminRepositoryInterface
 
     public function updateAdmin($id, array $data)
     {
-        return Admin::findOrFail($id)->update($data);
+        $admin = Admin::findOrFail($id);
+        $admin->update($data);
+
+        return $admin;
     }
 
     public function deleteAdmin($id)

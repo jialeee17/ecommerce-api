@@ -37,11 +37,6 @@ class CountryController extends Controller
         }
     }
 
-    public function store(Request $request)
-    {
-        //
-    }
-
     public function show(Country $country)
     {
         try {
@@ -57,15 +52,5 @@ class CountryController extends Controller
                 $e,
             );
         }
-    }
-
-    public function update(Request $request, Country $country)
-    {
-        //
-    }
-
-    public function destroy(Country $country)
-    {
-        //
     }
 }
