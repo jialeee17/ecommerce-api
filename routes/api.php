@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TagController;
 
 /*
@@ -49,10 +50,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('countries')->name('country.')->group(function () {
         Route::get('/', [CountryController::class, 'index'])->name('index');
-        // Route::post('/', [CountryController::class, 'store'])->name('store');
         Route::get('/{country}', [CountryController::class, 'show'])->name('show');
-        // Route::match(['put', 'patch'], '/{country}', [CountryController::class, 'update'])->name('update');
-        // Route::delete('/{country}', [CountryController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('categories')->name('category.')->group(function () {
@@ -95,5 +93,12 @@ Route::middleware('auth:sanctum')->group(function () {
                 Route::delete('/{attributeValue}', [AttributeController::class, 'destroyAttributeValue'])->name('destroy');
             });
         });
+    });
+
+    Route::prefix('settings')->name('setting.')->group(function () {
+        Route::get('/', [SettingController::class, 'index'])->name('index');
+        Route::get('/{setting}', [SettingController::class, 'show'])->name('show');
+        Route::match(['put', 'patch'], '/{setting}', [SettingController::class, 'update'])->name('update');
+        Route::delete('/{setting}', [SettingController::class, 'destroy'])->name('destroy');
     });
 });
