@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AttributeController;
+use App\Http\Controllers\BankAccountController;
+use App\Http\Controllers\BankController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\CustomerController;
@@ -38,6 +40,22 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{admin}', [AdminController::class, 'show'])->name('show');
         Route::match(['put', 'patch'], '/{admin}', [AdminController::class, 'update'])->name('update');
         Route::delete('/{admin}', [AdminController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('banks')->name('bank.')->group(function () {
+        Route::get('/', [BankController::class, 'index'])->name('index');
+        Route::post('/', [BankController::class, 'store'])->name('store');
+        Route::get('/{bank}', [BankController::class, 'show'])->name('show');
+        Route::match(['put', 'patch'], '/{bank}', [BankController::class, 'update'])->name('update');
+        Route::delete('/{bank}', [BankController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('bank-accounts')->name('bankAccount.')->group(function () {
+        Route::get('/', [BankAccountController::class, 'index'])->name('index');
+        Route::post('/', [BankAccountController::class, 'store'])->name('store');
+        Route::get('/{bankAccount}', [BankAccountController::class, 'show'])->name('show');
+        Route::match(['put', 'patch'], '/{bankAccount}', [BankAccountController::class, 'update'])->name('update');
+        Route::delete('/{bankAccount}', [BankAccountController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('customers')->name('customer.')->group(function () {
