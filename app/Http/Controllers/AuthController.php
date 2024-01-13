@@ -80,7 +80,7 @@ class AuthController extends Controller
                 [
                     'user' => $admin
                 ],
-                'Register Admin Successfully.',
+                str_replace(':name', 'Admin', __('messages.create.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -143,7 +143,7 @@ class AuthController extends Controller
                 [
                     'user' => $customer
                 ],
-                'Register Customer Successfully.',
+                str_replace(':name', 'Customer', __('messages.create.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(

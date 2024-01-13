@@ -27,7 +27,7 @@ class SettingController extends Controller
 
             return new ApiSuccessResponse(
                 $settings,
-                'Retrieve Setting List Successfully.',
+                str_replace(':name', 'Settings', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -42,7 +42,7 @@ class SettingController extends Controller
         try {
             return new ApiSuccessResponse(
                 $setting,
-                'Retrieve Setting Details Successfully.',
+                str_replace(':name', 'Setting', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -73,7 +73,7 @@ class SettingController extends Controller
 
             return new ApiSuccessResponse(
                 $data,
-                'Update Setting Details Successfully.',
+                str_replace(':name', 'Setting', __('messages.update.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -90,7 +90,7 @@ class SettingController extends Controller
 
             return new ApiSuccessResponse(
                 [],
-                'Delete Setting Successfully.',
+                str_replace(':name', 'Setting', __('messages.delete.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(

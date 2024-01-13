@@ -27,7 +27,7 @@ class CountryController extends Controller
                 [
                     'countries' => $countries
                 ],
-                'Retrieve Country List Successfully.',
+                str_replace(':name', 'Countries', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -44,7 +44,7 @@ class CountryController extends Controller
                 [
                     'country' => $country
                 ],
-                'Retrieve Country Details Successfully.',
+                str_replace(':name', 'Country', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(

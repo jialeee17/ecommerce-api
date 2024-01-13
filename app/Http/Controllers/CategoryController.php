@@ -27,7 +27,7 @@ class CategoryController extends Controller
 
             return new ApiSuccessResponse(
                 $categories,
-                'Retrieve Category List Successfully.',
+                str_replace(':name', 'Categories', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -58,7 +58,7 @@ class CategoryController extends Controller
 
             return new ApiSuccessResponse(
                 $category,
-                'Create Category Successfully.',
+                str_replace(':name', 'Category', __('messages.create.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -73,7 +73,7 @@ class CategoryController extends Controller
         try {
             return new ApiSuccessResponse(
                 $category,
-                'Retrieve Category Details Successfully.',
+                str_replace(':name', 'Category', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -108,7 +108,7 @@ class CategoryController extends Controller
 
             return new ApiSuccessResponse(
                 $data,
-                'Update Category Details Successfully.',
+                str_replace(':name', 'Category', __('messages.update.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -125,7 +125,7 @@ class CategoryController extends Controller
 
             return new ApiSuccessResponse(
                 [],
-                'Delete Category Successfully.',
+                str_replace(':name', 'Category', __('messages.delete.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(

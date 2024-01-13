@@ -26,7 +26,7 @@ class BankController extends Controller
 
             return new ApiSuccessResponse(
                 $banks,
-                'Retrieve Bank List Successfully.',
+                str_replace(':name', 'Banks', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -49,7 +49,7 @@ class BankController extends Controller
 
             return new ApiSuccessResponse(
                 $data,
-                'Create Bank Successfully.',
+                str_replace(':name', 'Bank', __('messages.create.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -64,7 +64,7 @@ class BankController extends Controller
         try {
             return new ApiSuccessResponse(
                 $bank,
-                'Retrieve Bank Details Successfully.',
+                str_replace(':name', 'Bank', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -87,7 +87,7 @@ class BankController extends Controller
 
             return new ApiSuccessResponse(
                 $data,
-                'Update Bank Details Successfully.',
+                str_replace(':name', 'Bank', __('messages.update.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -104,7 +104,7 @@ class BankController extends Controller
 
             return new ApiSuccessResponse(
                 [],
-                'Delete Bank Successfully.',
+                str_replace(':name', 'Bank', __('messages.delete.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(

@@ -30,7 +30,7 @@ class AttributeController extends Controller
 
             return new ApiSuccessResponse(
                 $attributes,
-                'Retrieve Attribute List Successfully.',
+                str_replace(':name', 'Attributes', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -52,7 +52,7 @@ class AttributeController extends Controller
 
             return new ApiSuccessResponse(
                 $attribute,
-                'Create Attribute Successfully.',
+                str_replace(':name', 'Attribute', __('messages.create.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -67,7 +67,7 @@ class AttributeController extends Controller
         try {
             return new ApiSuccessResponse(
                 $attribute,
-                'Retrieve Attribute Details Successfully.',
+                str_replace(':name', 'Attribute', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -89,7 +89,7 @@ class AttributeController extends Controller
 
             return new ApiSuccessResponse(
                 $attribute,
-                'Update Attribute Details Successfully.',
+                str_replace(':name', 'Attribute', __('messages.update.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -106,7 +106,7 @@ class AttributeController extends Controller
 
             return new ApiSuccessResponse(
                 [],
-                'Delete Attribute Successfully.',
+                str_replace(':name', 'Attribute', __('messages.delete.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -126,7 +126,7 @@ class AttributeController extends Controller
 
             return new ApiSuccessResponse(
                 $attributes,
-                'Retrieve Attribute Value List Successfully.',
+                str_replace(':name', 'Attribute Values', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -151,7 +151,7 @@ class AttributeController extends Controller
 
             return new ApiSuccessResponse(
                 $attributeValue,
-                'Create Attribute Value Successfully.',
+                str_replace(':name', 'Attribute Value', __('messages.create.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -166,7 +166,7 @@ class AttributeController extends Controller
         try {
             return new ApiSuccessResponse(
                 $attributeValue,
-                'Show Attribute Value Details Successfully.',
+                str_replace(':name', 'Attribute Value', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -191,7 +191,7 @@ class AttributeController extends Controller
 
             return new ApiSuccessResponse(
                 $attributeValue,
-                'Update Attribute Value Details Successfully.',
+                str_replace(':name', 'Attribute Value', __('messages.update.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -208,7 +208,7 @@ class AttributeController extends Controller
 
             return new ApiSuccessResponse(
                 [],
-                'Delete Attribute Value Successfully.',
+                str_replace(':name', 'Attribute Value', __('messages.delete.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(

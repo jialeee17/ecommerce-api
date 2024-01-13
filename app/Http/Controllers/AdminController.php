@@ -29,7 +29,7 @@ class AdminController extends Controller
 
             return new ApiSuccessResponse(
                 $admins,
-                'Retrieve Admin List Successfully.',
+                str_replace(':name', 'Admins', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -62,7 +62,7 @@ class AdminController extends Controller
 
             return new ApiSuccessResponse(
                 $admin,
-                'Create Admin Successfully.',
+                str_replace(':name', 'Admin', __('messages.create.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -77,7 +77,7 @@ class AdminController extends Controller
         try {
             return new ApiSuccessResponse(
                 $admin,
-                'Retrieve Admin Details Successfully.',
+                str_replace(':name', 'Admin', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -125,7 +125,7 @@ class AdminController extends Controller
 
             return new ApiSuccessResponse(
                 $data,
-                'Update Admin Details Successfully.',
+                str_replace(':name', 'Admin', __('messages.update.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -142,7 +142,7 @@ class AdminController extends Controller
 
             return new ApiSuccessResponse(
                 [],
-                'Delete Admin Successfully.',
+                str_replace(':name', 'Admin', __('messages.delete.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(

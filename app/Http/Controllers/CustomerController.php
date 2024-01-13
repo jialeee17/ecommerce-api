@@ -26,10 +26,8 @@ class CustomerController extends Controller
             $customers = $this->customerRepository->getAllCustomers();
 
             return new ApiSuccessResponse(
-                [
-                    'customers' => $customers
-                ],
-                'Retrieve Customer List Successfully.',
+                $customers,
+                str_replace(':name', 'Customers', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -58,10 +56,8 @@ class CustomerController extends Controller
             ]);
 
             return new ApiSuccessResponse(
-                [
-                    'customer' => $customer
-                ],
-                'Create Customer Successfully.',
+                $customer,
+                str_replace(':name', 'Customer', __('messages.create.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -75,10 +71,8 @@ class CustomerController extends Controller
     {
         try {
             return new ApiSuccessResponse(
-                [
-                    'customer' => $customer
-                ],
-                'Retrieve Customer Details Successfully.',
+                $customer,
+                str_replace(':name', 'Customer', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -111,7 +105,7 @@ class CustomerController extends Controller
 
             return new ApiSuccessResponse(
                 $data,
-                'Update Customer Details Successfully.',
+                str_replace(':name', 'Customer', __('messages.update.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -128,7 +122,7 @@ class CustomerController extends Controller
 
             return new ApiSuccessResponse(
                 [],
-                'Delete Customer Successfully.',
+                str_replace(':name', 'Customer', __('messages.delete.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(

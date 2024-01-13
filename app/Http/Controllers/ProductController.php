@@ -29,7 +29,7 @@ class ProductController extends Controller
 
             return new ApiSuccessResponse(
                 $data,
-                'Retrieve Product List Successfully.',
+                str_replace(':name', 'Products', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -46,7 +46,7 @@ class ProductController extends Controller
 
             return new ApiSuccessResponse(
                 $data,
-                'Create Product Successfully.',
+                str_replace(':name', 'Product', __('messages.create.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -61,7 +61,7 @@ class ProductController extends Controller
         try {
             return new ApiSuccessResponse(
                 $product,
-                'Retrieve Product Details Successfully.',
+                str_replace(':name', 'Product', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -78,7 +78,7 @@ class ProductController extends Controller
 
             return new ApiSuccessResponse(
                 $data,
-                'Update Product Successfully.',
+                str_replace(':name', 'Product', __('messages.update.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -95,7 +95,7 @@ class ProductController extends Controller
 
             return new ApiSuccessResponse(
                 [],
-                'Delete Product Successfully.',
+                str_replace(':name', 'Product', __('messages.delete.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(

@@ -26,7 +26,7 @@ class TagController extends Controller
 
             return new ApiSuccessResponse(
                 $tags,
-                'Retrieve Tag List Successfully.',
+                str_replace(':name', 'Tags', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -53,7 +53,7 @@ class TagController extends Controller
 
             return new ApiSuccessResponse(
                 $tag,
-                'Create Tag Successfully.',
+                str_replace(':name', 'Tag', __('messages.create.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -68,7 +68,7 @@ class TagController extends Controller
         try {
             return new ApiSuccessResponse(
                 $tag,
-                'Retrieve Tag Details Successfully.',
+                str_replace(':name', 'Tag', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -87,15 +87,15 @@ class TagController extends Controller
                 'description' => ['nullable', 'string'],
             ]);
 
-            $this->tagRepository->updateTag($tag->id, [
+            $tag = $this->tagRepository->updateTag($tag->id, [
                 'name' => $request->name,
                 'slug' => $request->slug,
                 'description' => $request->description,
             ]);
 
             return new ApiSuccessResponse(
-                [],
-                'Update Tag Details Successfully.',
+                $tag,
+                str_replace(':name', 'Tag', __('messages.update.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -112,7 +112,7 @@ class TagController extends Controller
 
             return new ApiSuccessResponse(
                 [],
-                'Delete Tag Successfully.',
+                str_replace(':name', 'Tag', __('messages.delete.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
