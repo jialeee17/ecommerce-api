@@ -24,9 +24,7 @@ class CountryController extends Controller
             $countries = $this->countryRepository->getAllCountries();
 
             return new ApiSuccessResponse(
-                [
-                    'countries' => $countries
-                ],
+                $countries,
                 str_replace(':name', 'Countries', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {
@@ -41,9 +39,7 @@ class CountryController extends Controller
     {
         try {
             return new ApiSuccessResponse(
-                [
-                    'country' => $country
-                ],
+                $country,
                 str_replace(':name', 'Country', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {

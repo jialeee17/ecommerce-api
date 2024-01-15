@@ -15,7 +15,6 @@ class Country extends Model
         'country_code',
         'currency',
         'flag_path',
-        'timezone',
     ];
 
     /* -------------------------------------------------------------------------- */

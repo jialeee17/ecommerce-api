@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('country_code', 2);
-            $table->string('currency');
+            $table->string('country_code', 2)->unique();
+            $table->string('currency')->nullable();
             $table->string('flag_path')->nullable();
-            $table->string('timezone');
             $table->timestamps();
         });
     }
