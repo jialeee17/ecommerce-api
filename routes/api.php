@@ -12,6 +12,7 @@ use App\Http\Controllers\CountryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\StateController;
 use App\Http\Controllers\TagController;
 
 /*
@@ -69,6 +70,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('countries')->name('country.')->group(function () {
         Route::get('/', [CountryController::class, 'index'])->name('index');
         Route::get('/{country}', [CountryController::class, 'show'])->name('show');
+    });
+
+    Route::prefix('states')->name('state.')->group(function () {
+        Route::get('/', [StateController::class, 'index'])->name('index');
+        Route::post('/', [StateController::class, 'store'])->name('store');
+        Route::get('/{state}', [StateController::class, 'show'])->name('show');
+        Route::match(['put', 'patch'], '/{state}', [StateController::class, 'update'])->name('update');
+        Route::delete('/{state}', [StateController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('categories')->name('category.')->group(function () {

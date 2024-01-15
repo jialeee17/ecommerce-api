@@ -3,30 +3,28 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Country extends Model
+class State extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'country_code',
-        'currency',
-        'flag_path',
+        'country_id',
+    ];
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
 
     /* -------------------------------------------------------------------------- */
     /*                                Relationships                               */
     /* -------------------------------------------------------------------------- */
-    public function customers(): HasMany
+    public function country(): BelongsTo
     {
-        return $this->hasMany(Customer::class);
-    }
-
-    public function states(): HasMany
-    {
-        return $this->hasMany(State::class);
+        return $this->belongsTo(Country::class);
     }
 }
