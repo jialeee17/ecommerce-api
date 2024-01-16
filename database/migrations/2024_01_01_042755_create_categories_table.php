@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('image_path')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
-            $table->foreignId('parent_category_id')->nullable()->constrained(table: 'categories')->onDelete('cascade');
+            $table->foreignId('parent_category_id')->nullable()->constrained(table: 'categories');
             $table->foreignId('created_by')->nullable()->constrained(table: 'admins');
             $table->foreignId('updated_by')->nullable()->constrained(table: 'admins');
             $table->foreignId('deleted_by')->nullable()->constrained(table: 'admins');
