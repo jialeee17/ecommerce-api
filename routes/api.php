@@ -12,6 +12,7 @@ use App\Http\Controllers\CountryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\ShippingAddressController;
 use App\Http\Controllers\StateController;
 use App\Http\Controllers\TagController;
 
@@ -127,5 +128,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{setting}', [SettingController::class, 'show'])->name('show');
         Route::match(['put', 'patch'], '/{setting}', [SettingController::class, 'update'])->name('update');
         Route::delete('/{setting}', [SettingController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('shipping-addresses')->name('shippingAddress.')->group(function () {
+        Route::get('/', [ShippingAddressController::class, 'index'])->name('index');
+        Route::post('/', [ShippingAddressController::class, 'store'])->name('store');
+        Route::get('/{shippingAddress}', [ShippingAddressController::class, 'show'])->name('show');
+        Route::match(['put', 'patch'], '/{shippingAddress}', [ShippingAddressController::class, 'update'])->name('update');
+        Route::delete('/{shippingAddress}', [ShippingAddressController::class, 'destroy'])->name('destroy');
     });
 });
