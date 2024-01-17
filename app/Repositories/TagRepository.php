@@ -26,8 +26,8 @@ class TagRepository
 
     public function deleteTag($id)
     {
-        $tags = Tag::findOrFail($id);
+        $tag = Tag::findOrFail($id);
 
-        return $tags->delete();
+        return $tag->delete();
     }
 }
