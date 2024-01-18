@@ -2,32 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\AddressTypesEnum;
 use Exception;
 use Illuminate\Http\Request;
-use App\Models\ShippingAddress;
 use Illuminate\Validation\Rule;
 use App\Enums\CommonStatusesEnum;
 use App\Http\Responses\ApiErrorResponse;
 use App\Http\Responses\ApiSuccessResponse;
-use App\Repositories\ShippingAddressRepository;
+use App\Models\Address;
+use App\Repositories\AddressRepository;
 
-class ShippingAddressController extends Controller
+class AddressController extends Controller
 {
-    private $shippingAddressRepository;
+    private $addressRepository;
 
-    public function __construct(ShippingAddressRepository $shippingAddressRepository)
+    public function __construct(AddressRepository $addressRepository)
     {
-        $this->shippingAddressRepository = $shippingAddressRepository;
+        $this->addressRepository = $addressRepository;
     }
 
     public function index()
     {
         try {
-            $shippingAddresses = $this->shippingAddressRepository->getAllShippingAddresses();
+            $addresses = $this->addressRepository->getAllAddresses();
 
             return new ApiSuccessResponse(
-                $shippingAddresses,
-                str_replace(':name', 'Shipping Addresses', __('messages.retrieve.success')),
+                $addresses,
+                str_replace(':name', 'Addresses', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -42,6 +43,7 @@ class ShippingAddressController extends Controller
         try {
             $request->validate([
                 'customer_id' => ['required', 'integer', 'exists:customers,id'],
+                'type' => ['required', 'string', Rule::enum(AddressTypesEnum::class)],
                 'address_1' => ['required', 'string'],
                 'address_2' => ['nullable', 'string'],
                 'city' => ['required', 'string'],
@@ -53,6 +55,7 @@ class ShippingAddressController extends Controller
 
             $data = [
                 'customer_id' => $request->customer_id,
+                'type' => $request->type,
                 'address_1' => $request->address_1,
                 'address_2' => $request->address_2,
                 'city' => $request->city,
@@ -62,11 +65,11 @@ class ShippingAddressController extends Controller
                 'status' => $request->status,
             ];
 
-            $shippingAddress = $this->shippingAddressRepository->createShippingAddress($data);
+            $address = $this->addressRepository->createAddress($data);
 
             return new ApiSuccessResponse(
-                $shippingAddress,
-                str_replace(':name', 'Shipping Address', __('messages.create.success')),
+                $address,
+                str_replace(':name', 'Address', __('messages.create.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -76,12 +79,12 @@ class ShippingAddressController extends Controller
         }
     }
 
-    public function show(ShippingAddress $shippingAddress)
+    public function show(Address $address)
     {
         try {
             return new ApiSuccessResponse(
-                $shippingAddress,
-                str_replace(':name', 'Shipping Address', __('messages.retrieve.success')),
+                $address,
+                str_replace(':name', 'Address', __('messages.retrieve.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -91,10 +94,11 @@ class ShippingAddressController extends Controller
         }
     }
 
-    public function update(Request $request, ShippingAddress $shippingAddress)
+    public function update(Request $request, Address $address)
     {
         try {
             $request->validate([
+                'type' => ['required', 'string', Rule::enum(AddressTypesEnum::class)],
                 'address_1' => ['required', 'string'],
                 'address_2' => ['nullable', 'string'],
                 'city' => ['required', 'string'],
@@ -105,6 +109,7 @@ class ShippingAddressController extends Controller
             ]);
 
             $data = [
+                'type' => $request->type,
                 'address_1' => $request->address_1,
                 'address_2' => $request->address_2,
                 'city' => $request->city,
@@ -114,11 +119,11 @@ class ShippingAddressController extends Controller
                 'status' => $request->status,
             ];
 
-            $data = $this->shippingAddressRepository->updateShippingAddress($shippingAddress->id, $data);
+            $data = $this->addressRepository->updateAddress($address->id, $data);
 
             return new ApiSuccessResponse(
                 $data,
-                str_replace(':name', 'Shipping Address', __('messages.update.success')),
+                str_replace(':name', 'Address', __('messages.update.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(
@@ -128,14 +133,14 @@ class ShippingAddressController extends Controller
         }
     }
 
-    public function destroy(ShippingAddress $shippingAddress)
+    public function destroy(Address $address)
     {
         try {
-            $this->shippingAddressRepository->deleteShippingAddress($shippingAddress->id);
+            $this->addressRepository->deleteAddress($address->id);
 
             return new ApiSuccessResponse(
                 [],
-                str_replace(':name', 'Shipping Address', __('messages.delete.success')),
+                str_replace(':name', 'Address', __('messages.delete.success')),
             );
         } catch (Exception $e) {
             return new ApiErrorResponse(

@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\AddressController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\AuthController;
@@ -141,12 +141,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/{paymentMethod}', [PaymentMethodController::class, 'destroy'])->name('destroy');
     });
 
-    Route::prefix('shipping-addresses')->name('shippingAddress.')->group(function () {
-        Route::get('/', [ShippingAddressController::class, 'index'])->name('index');
-        Route::post('/', [ShippingAddressController::class, 'store'])->name('store');
-        Route::get('/{shippingAddress}', [ShippingAddressController::class, 'show'])->name('show');
-        Route::match(['put', 'patch'], '/{shippingAddress}', [ShippingAddressController::class, 'update'])->name('update');
-        Route::delete('/{shippingAddress}', [ShippingAddressController::class, 'destroy'])->name('destroy');
+    Route::prefix('addresses')->name('address.')->group(function () {
+        Route::get('/', [AddressController::class, 'index'])->name('index');
+        Route::post('/', [AddressController::class, 'store'])->name('store');
+        Route::get('/{address}', [AddressController::class, 'show'])->name('show');
+        Route::match(['put', 'patch'], '/{address}', [AddressController::class, 'update'])->name('update');
+        Route::delete('/{address}', [AddressController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('shipping-methods')->name('shippingMethod.')->group(function () {

@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class ShippingAddress extends Model
+class Address extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'customer_id',
+        'type',
         'address_1',
         'address_2',
         'city',
