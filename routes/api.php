@@ -2,19 +2,21 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AttributeController;
-use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\BankController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StateController;
 use App\Http\Controllers\CountryController;
-use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\AttributeController;
+use App\Http\Controllers\BankAccountController;
+use App\Http\Controllers\ShippingZoneController;
+use App\Http\Controllers\ShippingMethodController;
 use App\Http\Controllers\ShippingAddressController;
-use App\Http\Controllers\StateController;
-use App\Http\Controllers\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -136,5 +138,20 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{shippingAddress}', [ShippingAddressController::class, 'show'])->name('show');
         Route::match(['put', 'patch'], '/{shippingAddress}', [ShippingAddressController::class, 'update'])->name('update');
         Route::delete('/{shippingAddress}', [ShippingAddressController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('shipping-methods')->name('shippingMethod.')->group(function () {
+        Route::get('/', [ShippingMethodController::class, 'index'])->name('index');
+        Route::get('/{shippingMethod}', [ShippingMethodController::class, 'show'])->name('show');
+        Route::match(['put', 'patch'], '/{shippingMethod}', [ShippingMethodController::class, 'update'])->name('update');
+        Route::delete('/{shippingMethod}', [ShippingMethodController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('shipping-zones')->name('shippingZone.')->group(function () {
+        Route::get('/', [ShippingZoneController::class, 'index'])->name('index');
+        Route::post('/', [ShippingZoneController::class, 'store'])->name('store');
+        Route::get('/{shippingZone}', [ShippingZoneController::class, 'show'])->name('show');
+        Route::match(['put', 'patch'], '/{shippingZone}', [ShippingZoneController::class, 'update'])->name('update');
+        Route::delete('/{shippingZone}', [ShippingZoneController::class, 'destroy'])->name('destroy');
     });
 });

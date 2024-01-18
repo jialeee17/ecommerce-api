@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             RolesAndPermissionsSeeder::class,
             StateSeeder::class,
             SettingSeeder::class,
+            ShippingMethodSeeder::class,
         ]);
     }
 }
