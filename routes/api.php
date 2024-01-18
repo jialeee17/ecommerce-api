@@ -15,6 +15,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\AttributeController;
 use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\ShippingZoneController;
+use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\ShippingMethodController;
 use App\Http\Controllers\ShippingAddressController;
 
@@ -130,6 +131,14 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{setting}', [SettingController::class, 'show'])->name('show');
         Route::match(['put', 'patch'], '/{setting}', [SettingController::class, 'update'])->name('update');
         Route::delete('/{setting}', [SettingController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('payment-methods')->name('paymentMethod.')->group(function () {
+        Route::get('/', [PaymentMethodController::class, 'index'])->name('index');
+        Route::post('/', [PaymentMethodController::class, 'store'])->name('store');
+        Route::get('/{paymentMethod}', [PaymentMethodController::class, 'show'])->name('show');
+        Route::match(['put', 'patch'], '/{paymentMethod}', [PaymentMethodController::class, 'update'])->name('update');
+        Route::delete('/{paymentMethod}', [PaymentMethodController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('shipping-addresses')->name('shippingAddress.')->group(function () {
