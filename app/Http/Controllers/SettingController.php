@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Setting;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use App\Enums\CommonStatusesEnum;
 use App\Repositories\SettingRepository;
 use App\Http\Responses\ApiErrorResponse;
 use App\Http\Responses\ApiSuccessResponse;
@@ -56,17 +54,11 @@ class SettingController extends Controller
     {
         try {
             $request->validate([
-                'name' => ['required', 'string'],
                 'value' => ['nullable'],
-                'description' => ['nullable', 'string'],
-                'status' => ['required', Rule::enum(CommonStatusesEnum::class)]
             ]);
 
             $data = [
-                'name' => $request->name,
                 'value' => $request->value,
-                'description' => $request->description,
-                'status' => $request->status
             ];
 
             $data = $this->settingRepository->updateSetting($setting->id, $data);

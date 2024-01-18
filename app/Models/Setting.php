@@ -12,16 +12,10 @@ class Setting extends Model
 {
     use HasFactory, SoftDeletes, BlameableTrait;
 
-    protected $with = [
-        'settingCategory',
-    ];
-
     protected $fillable = [
         'name',
         'value',
         'description',
-        'setting_category_id',
-        'status'
     ];
 
     protected $hidden = [
@@ -38,12 +32,4 @@ class Setting extends Model
     protected static $blameable = [
         'createdBy' => null,
     ];
-
-    /* -------------------------------------------------------------------------- */
-    /*                                Relationships                               */
-    /* -------------------------------------------------------------------------- */
-    public function settingCategory(): BelongsTo
-    {
-        return $this->belongsTo(SettingCategory::class);
-    }
 }

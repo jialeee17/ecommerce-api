@@ -16,8 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('value')->nullable();
             $table->text('description')->nullable();
-            $table->foreignId('setting_category_id')->constrained()->cascadeOnDelete();
-            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->foreignId('updated_by')->nullable()->constrained(table: 'admins');
             $table->foreignId('deleted_by')->nullable()->constrained(table: 'admins');
             $table->timestamps();
