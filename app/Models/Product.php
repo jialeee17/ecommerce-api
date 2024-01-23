@@ -35,6 +35,7 @@ class Product extends Model
         'gallery_image_paths',
         'quantity',
         'category_id',
+        'shipping_class_id',
         'status',
         'is_featured',
     ];
@@ -65,6 +66,11 @@ class Product extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function shippingClass(): BelongsTo
+    {
+        return $this->belongsTo(ShippingClass::class);
     }
 
     public function tags(): BelongsToMany

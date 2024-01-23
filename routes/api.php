@@ -17,7 +17,7 @@ use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\ShippingZoneController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\ShippingMethodController;
-use App\Http\Controllers\ShippingAddressController;
+use App\Http\Controllers\ShippingClassController;
 
 /*
 |--------------------------------------------------------------------------
@@ -162,5 +162,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{shippingZone}', [ShippingZoneController::class, 'show'])->name('show');
         Route::match(['put', 'patch'], '/{shippingZone}', [ShippingZoneController::class, 'update'])->name('update');
         Route::delete('/{shippingZone}', [ShippingZoneController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('shipping-classes')->name('shippingClass.')->group(function () {
+        Route::get('/', [ShippingClassController::class, 'index'])->name('index');
+        Route::post('/', [ShippingClassController::class, 'store'])->name('store');
+        Route::get('/{shippingClass}', [ShippingClassController::class, 'show'])->name('show');
+        Route::match(['put', 'patch'], '/{shippingClass}', [ShippingClassController::class, 'update'])->name('update');
+        Route::delete('/{shippingClass}', [ShippingClassController::class, 'destroy'])->name('destroy');
     });
 });
