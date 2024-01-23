@@ -20,11 +20,6 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('phone')->nullable();
-            $table->string('address_1')->nullable();
-            $table->string('address_2')->nullable();
-            $table->string('city')->nullable();
-            $table->string('state')->nullable();
-            $table->string('postcode')->nullable();
             $table->foreignId('country_id')->nullable()->constrained();
             $table->enum('status', ['active', 'inactive', 'suspended'])->default('active');
             $table->rememberToken();

@@ -22,11 +22,6 @@ class Customer extends Authenticatable
         'email',
         'password',
         'phone',
-        'address_1',
-        'address_2',
-        'city',
-        'state',
-        'postcode',
         'country_id',
         'status',
         'last_login_at',
@@ -48,8 +43,8 @@ class Customer extends Authenticatable
     /* -------------------------------------------------------------------------- */
     /*                                Relationships                               */
     /* -------------------------------------------------------------------------- */
-    public function shippingAddresses(): HasMany
+    public function addresses(): HasMany
     {
-        return $this->hasMany(ShippingAddress::class);
+        return $this->hasMany(Address::class);
     }
 }

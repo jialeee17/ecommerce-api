@@ -47,11 +47,6 @@ class CustomerController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'phone' => $request->phone,
-                'address_1' => $request->address_1,
-                'address_2' => $request->address_2,
-                'city' => $request->city,
-                'state' => $request->state,
-                'postcode' => $request->postcode,
                 'country_id' => $request->country_id,
             ]);
 
@@ -92,11 +87,6 @@ class CustomerController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'phone' => $request->phone,
-                'address_1' => $request->address_1,
-                'address_2' => $request->address_2,
-                'city' => $request->city,
-                'state' => $request->state,
-                'postcode' => $request->postcode,
                 'country_id' => $request->country_id,
                 'status' => $request->status,
             ];
