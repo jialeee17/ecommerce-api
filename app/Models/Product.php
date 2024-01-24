@@ -13,12 +13,6 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes, BlameableTrait;
 
-    protected $with = [
-        'category',
-        'tags',
-        'attributes'
-    ];
-
     protected $fillable = [
         'name',
         'slug',

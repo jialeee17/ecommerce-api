@@ -11,10 +11,6 @@ class Attribute extends Model
 {
     use HasFactory, BlameableTrait;
 
-    protected $with = [
-        'attributeValues'
-    ];
-
     protected $fillable = [
         'name',
         'slug',

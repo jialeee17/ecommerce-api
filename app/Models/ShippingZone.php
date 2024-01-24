@@ -11,11 +11,6 @@ class ShippingZone extends Model
 {
     use HasFactory, BlameableTrait;
 
-    protected $with = [
-        'shippingMethods',
-        'regions'
-    ];
-
     protected $fillable = [
         'name',
         'status',
